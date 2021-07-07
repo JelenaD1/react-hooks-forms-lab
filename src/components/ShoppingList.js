@@ -3,7 +3,7 @@ import ItemForm from "./ItemForm";
 import Filter from "./Filter";
 import Item from "./Item";
 
-function ShoppingList({ items }) {
+function ShoppingList({ items , onItemFormSubmit}) {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [search, setSearch] = useState("")
 
@@ -18,8 +18,9 @@ function ShoppingList({ items }) {
 
   const itemsToDisplay = items
   .filter((item) => {
-    if(search === "") return true
-    return item.name === search
+   
+    
+    return item.name.toLowerCase().includes(search.toLowerCase())
   })
   
   
@@ -31,7 +32,7 @@ function ShoppingList({ items }) {
 
   return (
     <div className="ShoppingList">
-      <ItemForm />
+      <ItemForm onItemFormSubmit={onItemFormSubmit}/>
       <Filter search={search}
               selectedCategory={selectedCategory}
       
